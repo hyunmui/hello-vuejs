@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04-10</title>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
+    integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"
+    integrity="sha512-IsoGB9P1Kjw962zrslxT91OfoKkAnlBfQDdh5HwFvOxwJ8xGV6MuDeAli4TkEMiUqhJVkvpxJBsIS14bSERgxA=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"
+    integrity="sha512-JMK7ImCd/9VxQM7FWvAT3njqo5iGKkWcOax6Bwzuq48xxFd7/jekKcgN+59ZRwBoEpZvv6Jkwh3fDGrBVWX5vA=="
+    crossorigin="anonymous"></script>
+  <style>
+    #list {
+      width: 480px;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    #list td,
+    #list th {
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    #list>thead>tr {
+      color: yellow;
+      background-color: purple;
+    }
+
+    [v-cloak] {
+      display: none
+    }
+  </style>
+</head>
+
+<body>
+  <div id="example" v-cloak>
+    <p>이름: <input type="text" v-model="name" v-on:keyup="search" placeholder="두자 이상 입력하세요"></p>
+    <table id="list">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>이름</th>
+          <th>전화번호</th>
+          <th>주소</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="contact in contacts">
+          <td>{{contact.no}}</td>
+          <td>{{contact.name}}</td>
+          <td>{{contact.tel}}</td>
+          <td>{{contact.address}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div v-show="isProcessing"></div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        name: '',
+        isProcessing: false,
+        contacts: []
+      },
+      methods: {
+        search: function (e) {
+          if (e.keyCode !== 13) {
+            return;
+          }
+
+          var val = e.target.value;
+          if (val.length >= 2) {
+            this.fetchContacts();
+          } else {
+            this.contacts = [];
+          }
+        },
+        fetchContacts: function () {
+          this.contacts = [];
+          this.isProcessing = true;
+
+          var url = 'http://sample.bmaster.kro.kr/contacts_long/search/' + this.name;
+          var vm = this;
+
+          fetch(url).then(function (response) {
+              return response.json()
+            })
+            .then(function (json) {
+              vm.contacts = json;
+              vm.isProcessing = false;
+            })
+            .catch(function (ex) {
+              console.log('parsing failed', ex);
+              vm.contacts = [];
+              vm.isProcessing = false;
+            });
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

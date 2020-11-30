@@ -1,0 +1,13 @@
+{
+  "name": "hello-vuejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hyunmui/hello-vuejs.git",
+  "author": "Hyeonmin Seon <hyunmui@outlook.kr>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "vue": "^2.6.12"
+  }
+}
