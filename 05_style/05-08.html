@@ -4,23 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>05-08</title>
 
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/node_modules/vue/dist/vue.min.js"></script>
+
+  <style>
+    .box_color {
+      background-color: orange;
+    }
+
+    .center {
+      width: 200px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      border: 1px solid gray;
+    }
+  </style>
 </head>
 
 <body>
 
+  <div id="example">
+    <center-box v-bind:class="box_style"></center-box>
+  </div>
+
   <script>
     Vue.config.devtools = true;
 
+    Vue.component('center-box', {
+      template: '<div class="center">중앙에 위치</div>'
+    })
+
     var vm = new Vue({
       el: '#example',
-      data: {}
+      data: {
+        box_style: {
+          box_color: true
+        }
+      }
     })
   </script>
 </body>
