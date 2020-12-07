@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06-08</title>
+
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/node_modules/vue/dist/vue.min.js"></script>
+
+  <script>
+    Vue.component('option-component', {
+      template: '<option>hello</option>'
+    })
+  </script>
+
+  <script type="text/x-template" id="selectTemplate">
+    <select>
+      <option-component></option-component>
+      <option-component></option-component>
+    </select>
+  </script>
+
+  <script>
+    Vue.component('select-component', {
+      template: '#selectTemplate'
+    })
+  </script>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <select-component></select-component>
+  </div>
+
+  <script>
+    Vue.config.devtools = true;
+
+    var v = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+
+</html>
