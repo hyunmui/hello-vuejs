@@ -1,4 +1,5 @@
 {
     "intelephense.environment.phpVersion": "7.4.13",
     "phpserver.port": 5000,
+    "editor.formatOnSave": true,
 }
