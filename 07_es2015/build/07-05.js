@@ -7,7 +7,11 @@ var a1 = arr[0],
 
 console.log(a1, a2, a3);
 
-var p1 = { name: '홍길동', age: 20, gender: 'M' };
+var p1 = {
+  name: '홍길동',
+  age: 20,
+  gender: 'M'
+};
 var n = p1.name,
     a = p1.age,
     gender = p1.gender;
